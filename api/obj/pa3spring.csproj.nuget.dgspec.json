@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\willt\\Desktop\\School Stuff\\MIS 321\\pa3spring\\pa3spring.csproj": {}
+    "C:\\Users\\willt\\Desktop\\School Stuff\\MIS 321\\pa3spring\\api\\pa3spring.csproj": {}
   },
   "projects": {
-    "C:\\Users\\willt\\Desktop\\School Stuff\\MIS 321\\pa3spring\\pa3spring.csproj": {
+    "C:\\Users\\willt\\Desktop\\School Stuff\\MIS 321\\pa3spring\\api\\pa3spring.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\willt\\Desktop\\School Stuff\\MIS 321\\pa3spring\\pa3spring.csproj",
+        "projectUniqueName": "C:\\Users\\willt\\Desktop\\School Stuff\\MIS 321\\pa3spring\\api\\pa3spring.csproj",
         "projectName": "pa3spring",
-        "projectPath": "C:\\Users\\willt\\Desktop\\School Stuff\\MIS 321\\pa3spring\\pa3spring.csproj",
+        "projectPath": "C:\\Users\\willt\\Desktop\\School Stuff\\MIS 321\\pa3spring\\api\\pa3spring.csproj",
         "packagesPath": "C:\\Users\\willt\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\willt\\Desktop\\School Stuff\\MIS 321\\pa3spring\\obj\\",
+        "outputPath": "C:\\Users\\willt\\Desktop\\School Stuff\\MIS 321\\pa3spring\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\willt\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.11, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
