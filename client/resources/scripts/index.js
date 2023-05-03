@@ -115,9 +115,9 @@ function CreateTable(songs)
             tableRow.appendChild(td6)
             deleteButton.onclick = function()
             {
-                song.isDeleted = "true"
-                SaveToCookies(song)
-                location.reload()
+                let editId = song.songId
+                DeleteSong(editId)
+                // location.reload()
             }
         }
         else
@@ -148,7 +148,7 @@ function CreateTable(songs)
             deleteButton.onclick = function()
             {
                 song.isDeleted = "true"
-                SaveToCookies(song)
+                DeleteSong(song)
                 location.reload()
             }
         }
@@ -236,4 +236,15 @@ function PostSong(song)
         body: JSON.stringify(song),
       });
       // render();
+}
+function DeleteSong(editId)
+{
+    fetch(url, {
+        method: "DELETE",
+        headers: {
+            accept: "*/*",
+          "Content-Type": "application/json",
+        },
+        body: editId
+    });
 }

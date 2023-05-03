@@ -25,7 +25,7 @@ namespace api.models
         public void DeleteSong(string id)
         {
             int indexNumber = allSongs.FindIndex(s => s.songId == id);
-            allSongs.RemoveAt(indexNumber);
+            allSongs[indexNumber].isDeleted = ("true");
         }
     }
 

@@ -56,9 +56,10 @@ namespace pa3spring.Controllers
 
         // DELETE: api/song/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
             songHandler mySongHandler = new songHandler();
+            mySongHandler.DeleteSong(id);
         }
     }
 }
