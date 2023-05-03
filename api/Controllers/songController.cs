@@ -16,19 +16,19 @@ namespace pa3spring.Controllers
     {
         // GET: api/song
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<song> Get()
         {
-            song testSong = new song()
-            {
-                songId = 1,
-                songTitle = "Daisy's Song",
-                artistName = "Daisy",
-                isFavorited = false,
-                isDeleted = false
-            };
-            string testString = testSong.songTitle.ToString();
+            // song testSong = new song()
+            // {
+            //     songId = "1",
+            //     songTitle = "Daisy's Song",
+            //     artistName = "Daisy",
+            //     isFavorited = false,
+            //     isDeleted = false
+            // };
             
-            return new string[] {testString};
+            songHandler mySongHandler = new songHandler();
+            return mySongHandler.GetAllSongs();
         }
 
         // GET: api/song/5
