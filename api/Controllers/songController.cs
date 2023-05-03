@@ -40,20 +40,25 @@ namespace pa3spring.Controllers
 
         // POST: api/song
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] song value)
         {
+            value.songId = Guid.NewGuid().ToString();
+            songHandler mySongHandler = new songHandler();
+            mySongHandler.AddSong(value);
         }
 
         // PUT: api/song/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] song value)
         {
+            songHandler mySongHandler = new songHandler();
         }
 
         // DELETE: api/song/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            songHandler mySongHandler = new songHandler();
         }
     }
 }

@@ -16,31 +16,6 @@ const getSongs = function (){
     });
 }
 
-// var songs = function()
-//     {
-//         fetch(url).then(function(response){
-//             return response.json();
-//         })
-//         .then(function(data) ){
-//             CreateTable(data);
-//         }
-//     }
-
-// function HandleOnLoad()
-// {
-//     // ReadAllSongs(); // function used for testing
-//     // CreateTable();
-//     var songs = (function()
-//     {
-//         fetch(url).then(function(response){
-//             return response.json();
-//         })
-//     })
-//     // var songs = JSON.parse(tempSongs);
-//     ReadAllSongs(songs); // function used for testing
-//     // CreateTable(songs);
-//     // CreateForm();
-// }
 function ReadAllSongs(songs)
 {
     songs.forEach(song => {
@@ -128,7 +103,7 @@ function CreateTable(songs)
             favoriteButton.onclick = function()
             {
                 song.isFavorited = "true"
-                SaveToCookies(song)
+                PostSong(song)
                 location.reload()
             }
             let td6 = document.createElement("td")
@@ -204,19 +179,19 @@ function CreateForm()
     {
         e.preventDefault()
         let song = {
-            id: songs.length,
-            title: e.target.elements.newSong.value,
-            artist: e.target.elements.newArtist.value,
+            songId: "99",
+            songTitle: e.target.elements.newSong.value,
+            artistName: e.target.elements.newArtist.value,
             dateAdded: new Date().toJSON().slice(0,10),
             isFavorited: "false",
             isDeleted: "false"
         }
         AddRow(song)
-        songs.push(song)
-        SaveToCookies()
+        // songs.push(song)
+        PostSong(song)
         e.target.elements.newSong.value = " "
         e.target.elements.newArtist.value = " "
-        location.reload()
+        // location.reload()
     })
 
     app.appendChild(form)
@@ -249,4 +224,16 @@ function AddRow(song)
     tableRow.appendChild(td4)
     
     tablebody.appendChild(tableRow)
+}
+function PostSong(song)
+{
+    fetch(url, {
+        method: "POST",
+        headers: {
+          accept: "*/*",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(song),
+      });
+      // render();
 }
