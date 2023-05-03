@@ -6,8 +6,8 @@ namespace api.models
 
         public List<song> GetAllSongs()
         {
-            song testSong = new song(){songId = "1", songTitle = "Daisy's Song", artistName = "Daisy", isFavorited = false,isDeleted = false};
-            song test2 = new song(){songId = "2", songTitle = "Joey's Song", artistName = "Joey", isFavorited = false, isDeleted = false};
+            song testSong = new song(){songId = "1", songTitle = "Daisy's Song", artistName = "Daisy", isFavorited = "false",isDeleted = "false", dateAdded = "01-01-01"};
+            song test2 = new song(){songId = "2", songTitle = "Joey's Song", artistName = "Joey", isFavorited = "false", isDeleted = "false", dateAdded = "02-02-02"};
             allSongs.Add(testSong);
             allSongs.Add(test2);
             return allSongs;

@@ -5,8 +5,10 @@ namespace api.models
         public string? songId { get; set; }
         public string? songTitle { get; set; }
         public string? artistName { get; set; }
-        public bool isFavorited { get; set; }
-        public bool isDeleted { get; set; }
+        public string? isFavorited { get; set; }
+        public string? isDeleted { get; set; }
+
+        public string? dateAdded {get; set;}
 
         public song()
         {

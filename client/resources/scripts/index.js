@@ -1,6 +1,21 @@
 let app = document.getElementById('App');
 const url = "https://localhost:7159/api/song";
 
+const render = () => {
+    getSongs();
+  };
+const getSongs = function (){
+    fetch(url)
+    .then(function (response){
+        return response.json();
+    })
+    .then(function (data){
+        ReadAllSongs(data);
+        CreateTable(data);
+        CreateForm();
+    });
+}
+
 // var songs = function()
 //     {
 //         fetch(url).then(function(response){
@@ -11,23 +26,25 @@ const url = "https://localhost:7159/api/song";
 //         }
 //     }
 
-function HandleOnLoad()
-{
-    // ReadAllSongs(); // function used for testing
-    // CreateTable();
-    let songs = Array.from(function()
-    {
-        fetch(url).then(function(response){
-            return response.json();
-        })
-    })
-    CreateTable(songs);
-    CreateForm();
-}
-function ReadAllSongs()
+// function HandleOnLoad()
+// {
+//     // ReadAllSongs(); // function used for testing
+//     // CreateTable();
+//     var songs = (function()
+//     {
+//         fetch(url).then(function(response){
+//             return response.json();
+//         })
+//     })
+//     // var songs = JSON.parse(tempSongs);
+//     ReadAllSongs(songs); // function used for testing
+//     // CreateTable(songs);
+//     // CreateForm();
+// }
+function ReadAllSongs(songs)
 {
     songs.forEach(song => {
-        console.log("Title: " + song.title + "Artist: " + song.artist + "Deleted " + song.isDeleted + "Favorited " + song.isFavorited)
+        console.log("Title: " + song.songTitle + "Artist: " + song.artistName + "Deleted " + song.isDeleted + "Favorited " + song.isFavorited)
     });
 }
 function CreateTable(songs)
@@ -74,24 +91,24 @@ function CreateTable(songs)
     
     songs.forEach(song =>
     {
-        if (song.isDeleted == false)
+        if (song.isDeleted == "false")
     {
         let tableRow = document.createElement("tr")
         tablebody.appendChild(tableRow)
         
         let td1 = document.createElement("td")
         td1.width = 500
-        td1.appendChild(document.createTextNode(`${song.id}`))
+        td1.appendChild(document.createTextNode(`${song.songId}`))
         tableRow.appendChild(td1)
 
         let td2 = document.createElement("td")
         td2.width = 500
-        td2.appendChild(document.createTextNode(`${song.title}`))
+        td2.appendChild(document.createTextNode(`${song.songTitle}`))
         tableRow.appendChild(td2)
 
         let td3 = document.createElement("td")
         td3.width = 500
-        td3.appendChild(document.createTextNode(`${song.artist}`))
+        td3.appendChild(document.createTextNode(`${song.artistName}`))
         tableRow.appendChild(td3)
 
         let td4 = document.createElement("td")
@@ -99,7 +116,7 @@ function CreateTable(songs)
         td4.appendChild(document.createTextNode(`${song.dateAdded}`))
         tableRow.appendChild(td4)
 
-        if (song.isFavorited != true)
+        if (song.isFavorited != "true")
         {
             let td5 = document.createElement("td")
             td5.width = 500
@@ -110,7 +127,7 @@ function CreateTable(songs)
             tableRow.appendChild(td5)
             favoriteButton.onclick = function()
             {
-                song.isFavorited = true
+                song.isFavorited = "true"
                 SaveToCookies(song)
                 location.reload()
             }
@@ -123,7 +140,7 @@ function CreateTable(songs)
             tableRow.appendChild(td6)
             deleteButton.onclick = function()
             {
-                song.isDeleted = true
+                song.isDeleted = "true"
                 SaveToCookies(song)
                 location.reload()
             }
@@ -141,7 +158,7 @@ function CreateTable(songs)
             tableRow.appendChild(td5)
             favoriteButton.onclick = function()
             {
-                song.isFavorited = true
+                song.isFavorited = "true"
                 SaveToCookies(song)
                 location.reload()
             }
@@ -155,7 +172,7 @@ function CreateTable(songs)
             tableRow.appendChild(td6)
             deleteButton.onclick = function()
             {
-                song.isDeleted = true
+                song.isDeleted = "true"
                 SaveToCookies(song)
                 location.reload()
             }
@@ -191,8 +208,8 @@ function CreateForm()
             title: e.target.elements.newSong.value,
             artist: e.target.elements.newArtist.value,
             dateAdded: new Date().toJSON().slice(0,10),
-            isFavorited: false,
-            isDeleted: false
+            isFavorited: "false",
+            isDeleted: "false"
         }
         AddRow(song)
         songs.push(song)
@@ -213,17 +230,17 @@ function AddRow(song)
     
     let td1 = document.createElement("td")
     td1.width = 500
-    td1.appendChild(document.createTextNode(`${song.id}`))
+    td1.appendChild(document.createTextNode(`${song.songId}`))
     tableRow.appendChild(td1)
 
     let td2 = document.createElement("td")
     td2.width = 500
-    td2.appendChild(document.createTextNode(`${song.title}`))
+    td2.appendChild(document.createTextNode(`${song.songTitle}`))
     tableRow.appendChild(td2)
 
     let td3 = document.createElement("td")
     td3.width = 500
-    td3.appendChild(document.createTextNode(`${song.artist}`))
+    td3.appendChild(document.createTextNode(`${song.artistName}`))
     tableRow.appendChild(td3)
 
     let td4 = document.createElement("td")
