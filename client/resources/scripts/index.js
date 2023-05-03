@@ -134,7 +134,7 @@ function CreateTable(songs)
             favoriteButton.onclick = function()
             {
                 song.isFavorited = "true"
-                SaveToCookies(song)
+                PutSong(song)
                 location.reload()
             }
             
@@ -247,4 +247,15 @@ function DeleteSong(editId)
         },
         body: editId
     });
+}
+function PutSong(song)
+{
+    fetch(url, {
+        method: "PUT",
+        headers: {
+            accept: "*/*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(song.songId, song)
+    })
 }

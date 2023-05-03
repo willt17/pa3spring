@@ -49,9 +49,10 @@ namespace pa3spring.Controllers
 
         // PUT: api/song/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] song value)
+        public void Put(string id, [FromBody] song value)
         {
             songHandler mySongHandler = new songHandler();
+            mySongHandler.EditSong(id, value);
         }
 
         // DELETE: api/song/5
