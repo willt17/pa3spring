@@ -1,3 +1,7 @@
+using System.Data;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
 namespace api.models
 {
     public class songHandler
@@ -6,11 +10,30 @@ namespace api.models
 
         public List<song> GetAllSongs()
         {
-            song testSong = new song(){songId = "1", songTitle = "Daisy's Song", artistName = "Daisy", isFavorited = "false",isDeleted = "false", dateAdded = "01-01-01"};
-            song test2 = new song(){songId = "2", songTitle = "Joey's Song", artistName = "Joey", isFavorited = "false", isDeleted = "false", dateAdded = "02-02-02"};
-            allSongs.Add(testSong);
-            allSongs.Add(test2);
-            return allSongs;
+            // song testSong = new song(){songId = "1", songTitle = "Daisy's Song", artistName = "Daisy", isFavorited = "false",isDeleted = "false", dateAdded = "01-01-01"};
+            // song test2 = new song(){songId = "2", songTitle = "Joey's Song", artistName = "Joey", isFavorited = "false", isDeleted = "false", dateAdded = "02-02-02"};
+            // allSongs.Add(testSong);
+            // allSongs.Add(test2);
+            DBconnection connection = new DBconnection();
+            bool isOpen = connection.OpenCon();
+            if(isOpen)
+            {
+                MySqlConnection con = connection.GetCon();
+                string statement = "SELECT * from songs";
+                using var cmd = new MySqlCommand(statement, con);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while(reader.Read())
+                {
+                    song tempSong = new song() {songId = reader.GetString(0), songTitle = reader.GetString(1), artistName = reader.GetString(2), dateAdded = reader.GetString(3), isDeleted = reader.GetString(4), isFavorited = reader.GetString(5)};
+                    allSongs.Add(tempSong);
+                }
+                connection.CloseCon();
+                return allSongs;
+            }
+            else
+            {
+                return new List<song>();
+            }
         }
         public void AddSong(song newSong)
         {
