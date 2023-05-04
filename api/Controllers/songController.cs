@@ -27,8 +27,8 @@ namespace pa3spring.Controllers
             //     isDeleted = false
             // };
             
-            songHandler mySongHandler = new songHandler();
-            return mySongHandler.GetAllSongs();
+            // songHandler mySongHandler = new songHandler();
+            return songHandler.GetAllSongs();
         }
 
         // GET: api/song/5
@@ -43,24 +43,28 @@ namespace pa3spring.Controllers
         public void Post([FromBody] song value)
         {
             value.songId = Guid.NewGuid().ToString();
-            songHandler mySongHandler = new songHandler();
-            mySongHandler.AddSong(value);
+            songSave.AddSong(value);
         }
 
         // PUT: api/song/5
         [HttpPut("{id}")]
         public void Put(string id, [FromBody] song value)
         {
-            songHandler mySongHandler = new songHandler();
-            mySongHandler.EditSong(id, value);
+            List<song> songSearch = songHandler.GetAllSongs();
+            int indexNumber = songSearch.FindIndex(s => s.songId == id);
+            song putSong = songSearch[indexNumber];
+            System.Console.WriteLine(id);
+            songPut.SaveEdit(id, putSong);
         }
 
         // DELETE: api/song/5
         [HttpDelete("{id}")]
         public void Delete(string id)
         {
-            songHandler mySongHandler = new songHandler();
-            mySongHandler.DeleteSong(id);
+            List<song> songSearch = songHandler.GetAllSongs();
+            int indexNumber = songSearch.FindIndex(s => s.songId == id);
+            song deleteSong = songSearch[indexNumber];
+            songDelete.DeleteSong(id, deleteSong);
         }
     }
 }

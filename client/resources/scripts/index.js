@@ -104,7 +104,7 @@ function CreateTable(songs)
             {
                 song.isFavorited = "true"
                 PostSong(song)
-                location.reload()
+                // location.reload()
             }
             let td6 = document.createElement("td")
             td6.width = 500
@@ -135,7 +135,7 @@ function CreateTable(songs)
             {
                 song.isFavorited = "true"
                 PutSong(song)
-                location.reload()
+                // location.reload()
             }
             
             let td6 = document.createElement("td")
@@ -149,7 +149,7 @@ function CreateTable(songs)
             {
                 song.isDeleted = "true"
                 DeleteSong(song)
-                location.reload()
+                // location.reload()
             }
         }
     }
